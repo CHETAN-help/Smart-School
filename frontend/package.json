@@ -21,13 +21,14 @@
     "recharts": "^2.6.2",
     "redux": "^4.2.1",
     "styled-components": "^5.3.10",
-    "serve": "^14.0.1" 
+    "serve": "^14.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "serve -s build -l 3000"
   },
   "eslintConfig": {
     "extends": [
