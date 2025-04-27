@@ -1,22 +1,23 @@
+# Use Node.js 16 as the base image
 FROM node:16
 
-# Create app directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json for dependency installation
 COPY package*.json ./
 
-# Install app dependencies
+# Install app dependencies (including dev dependencies)
 RUN npm install
 
-# Copy the app source code
+# Copy the rest of the application files into the container
 COPY . .
 
-# Expose the port (4000 for backend)
+# Expose port 4000 (for backend)
 EXPOSE 4000
 
-# Build the app if necessary (e.g., for TypeScript or build step)
+# If your app requires a build step (e.g., TypeScript), uncomment the following line:
 # RUN npm run build
 
-# Start the application
+# Start the application (assuming `npm start` is defined in your package.json)
 CMD ["npm", "start"]
