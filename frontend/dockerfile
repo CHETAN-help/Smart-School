@@ -1,24 +1,26 @@
+# Use Node.js 16 as the base image
 FROM node:16
 
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json for dependency installation
 COPY package*.json ./
 
-# Install app dependencies
-RUN npm install
+# Install production dependencies first
+RUN npm install --production
 
-# Copy the app source code
+# Copy the rest of the application files
 COPY . .
 
 # Build the app for production
 RUN npm run build
 
-# Install a static file server to serve the build
+# Install a static file server globally
 RUN npm install -g serve
 
-# Expose the port (default for Create React App is 3000)
+# Expose port 3000 (default for Create React App or Next.js)
 EXPOSE 3000
 
-# Serve the app in production mode
+# Start the app using the serve command in production mode
 CMD ["serve", "-s", "build", "-l", "3000"]
