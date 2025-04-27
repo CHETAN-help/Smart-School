@@ -1,13 +1,19 @@
-FROM node:14
+FROM node:16
 
 WORKDIR /app
 
+# Copy package.json and package-lock.json for better caching
 COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
+# Copy the rest of the app code
 COPY . .
 
+# Expose the port (3000 for Next.js or other frontend frameworks)
 EXPOSE 3000
 
+# Build and start the app in production mode
+RUN npm run build
 CMD ["npm", "start"]
