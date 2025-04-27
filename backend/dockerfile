@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 # Create app directory
 WORKDIR /app
@@ -9,11 +9,14 @@ COPY package*.json ./
 # Install app dependencies
 RUN npm install
 
-# Copy app source code
+# Copy the app source code
 COPY . .
 
-# Expose the port
+# Expose the port (4000 for backend)
 EXPOSE 4000
+
+# Build the app if necessary (e.g., for TypeScript or build step)
+# RUN npm run build
 
 # Start the application
 CMD ["npm", "start"]
